@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Óscar Martín García | Portfolio Profesional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #4a90a4;
+            --accent: #1e3a8a;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            padding: 4rem 2rem;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--light-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .header-logo:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .header-logo-placeholder {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .profile-info h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.025em;
+        }
+
+        .profile-info .title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .contact-item:hover {
+            background: var(--light-bg);
+            border-color: var(--border);
+            transform: translateX(5px);
+            color: var(--text-primary);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+            padding-top: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Current Positions */
+        .position-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .position-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .position-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .company-logos {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .logo-container {
+            width: 60px;
+            height: 60px;
+            background: var(--light-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 4px;
+        }
+
+        .logo-container:hover {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .cert-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px; /* mantiene los bordes redondeados */
+        }
+
+
+        .single-logo {
+            width: 80px;
+            height: 80px;
+            font-size: 1rem;
+        }
+
+        .position-card h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .company {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .duration {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .position-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            gap: 1.8rem;
+        }
+
+        .education-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.education-item:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.education-logo {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light-bg);
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.education-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.education-text h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.education-text .institution {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+}
+
+.education-text .duration {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+
+        .institution {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .education-item .duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .cert-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+        }
+
+        .cert-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .cert-provider {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* LinkedIn button */
+        .linkedin-btn {
+            background: #0077B5;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .linkedin-btn:hover {
+            background: #005885;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .linkedin-icon {
+            width: 20px;
+            height: 20px;
+            background: white;
+            color: #0077B5;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                font-size: 2.5rem;
+                margin-top: 50px;
+            }
+
+            .profile-info h1 {
+                font-size: 2.2rem;
+            }
+
+            .profile-info .title {
+                font-size: 1.2rem;
+            }
+
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .position-card, .education-item, .cert-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Subtle background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(44, 90, 160, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(74, 144, 164, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(30, 58, 138, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+    <div class="header-logo mobile-margin">
+        <img src="https://i.imgur.com/edNciHK.png" alt="Company Logo" />
+    </div>
+
+        
+        <div class="profile-container">
+            <div class="profile-photo" onclick="uploadProfilePhoto()">
+                <img src="https://i.imgur.com/9y8KWC5.png" alt="Óscar Martín García" />
+            </div>
+            <div class="profile-info">
+                <h1>Óscar Martín García</h1>
+                <div class="title">Head of Nexora & Business Analyst at Qaracter</div>
+                
+<div class="contact-info">
+    <div class="contact-item">
+        <span class="contact-icon">
+            <!-- Icono de ubicación -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z"/>
+            </svg>
+        </span>
+        <span>Madrid, España</span>
+    </div>
+
+    <div class="contact-item">
+        <span class="contact-icon">
+            <!-- Icono de teléfono -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.2.48 2.5.74 3.84.74a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22.5 1.5 13.93 1.5 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.34.26 2.64.74 3.84.12.3.07.66-.21 1.11l-2.2 2.2z"/>
+            </svg>
+        </span>
+        <span>634 510 743</span>
+    </div>
+
+    <div class="contact-item">
+        <span class="contact-icon">
+            <!-- Icono corporativo/email -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+        </span>
+        <span>oscar.martin@qaracter.com</span>
+    </div>
+
+    <div class="contact-item">
+        <span class="contact-icon">
+            <!-- Icono personal/email -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </span>
+        <span>oscarmg04@gmail.com</span>
+    </div>
+</div>
+
+                
+                <a href="https://www.linkedin.com/in/óscar-martín-garcía-bb5089250" target="_blank" class="linkedin-btn">
+                    <span class="linkedin-icon">
+                        <img src="https://logospng.org/download/linkedin/logo-linkedin-icon-4096.png" alt="LinkedIn" style="width: 16px; height: 16px;">
+                    </span>
+                    Ver LinkedIn
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Current Positions -->
+        <section class="section">
+            <h2 class="section-title">Posiciones Actuales</h2>
+            <div class="position-grid">
+                <div class="position-card fade-in">
+                    <div class="company-logos">
+                        <div class="logo-container">
+                            <img src="https://i.imgur.com/edNciHK.png" alt="Qaracter Logo">
+                        </div>
+                        <div class="logo-container">
+                            <img src="https://i.imgur.com/1GcRlFl.png" alt="Nexora Logo">
+                        </div>
+                    </div>
+                    <h3>Head of Nexora & Business Analyst</h3>
+                    <div class="company">Qaracter - Beyond your Challenge</div>
+                    <div class="duration">Julio 2025 - Actualidad</div>
+                    <p>Analizo y optimizo procesos de negocio, diseñando soluciones digitales y flujos de trabajo con IA para impulsar la eficiencia en Qaracter. Como Head de Nexora, lidero la plataforma de aprendizaje y desarrollo de habilidades con IA, creando experiencias formativas innovadoras.</p>
+                </div>
+                
+                <div class="position-card fade-in">
+                    <div class="company-logos">
+                        <div class="logo-container single-logo">
+                            <img src="https://i.imgur.com/TebSLKK.png" alt="LexyOne Logo">
+                        </div>
+                    </div>
+                    <h3>Founder & AI Strategist</h3>
+                    <div class="company">LexyOne</div>
+                    <div class="duration">Julio 2025 - Actualidad</div>
+                    <p>Laboratorio experimental donde agentes de IA gestionan autónomamente una organización completa. Exploramos los límites tecnológicos y éticos de las organizaciones autónomas utilizando herramientas de automatización y modelos de IA avanzados.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section">
+    <h2 class="section-title">Formación</h2>
+    <div class="education-grid">
+        <div class="education-item slide-in-left">
+            <div class="education-text">
+                <h4>Máster en Ingeniería y Desarrollo de Soluciones de IA Generativa</h4>
+                <div class="institution">EBIS Business Techschool</div>
+                <div class="duration">Septiembre 2025 - Mayo 2026</div>
+            </div>
+            <div class="education-logo">
+                <img src="https://www.ebiseducation.com/assets/IEBISLogoSimple.png" alt="EBIS Business Techschool Logo">
+            </div>
+        </div>
+        
+        <div class="education-item slide-in-left">
+            <div class="education-text">
+                <h4>Máster en Negocios y Estrategia Empresarial - ThePowerMBA</h4>
+                <div class="institution">thePower</div>
+                <div class="duration">Mayo 2025 - 2026</div>
+            </div>
+            <div class="education-logo">
+                <img src="https://i.imgur.com/sSpNGKI.png" alt="ThePowerMBA Logo">
+            </div>
+        </div>
+        
+        <div class="education-item slide-in-left">
+            <div class="education-text">
+                <h4>Desarrollo de Aplicaciones Multiplataforma</h4>
+                <div class="institution">Universidad Europea</div>
+                <div class="duration">Septiembre 2023 - Junio 2025</div>
+            </div>
+            <div class="education-logo">
+                <img src="https://www.signe.es/wp-content/uploads/2021/10/UE_Logo_Positive_RGB_8886cecf-afc9-4280-aa69-8615676d1d03_1513x-2-e1635163959405.png" alt="Universidad Europea Logo">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Featured Certifications -->
+        <section class="section">
+            <h2 class="section-title">Certificaciones Destacadas</h2>
+            <div class="cert-grid">
+                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://i.imgur.com/849dLGC.png" alt="IBM Logo">
+                    </div>
+                    <h4>AI Developer Professional Certificate</h4>
+                    <div class="cert-provider">IBM</div>
+                    <div class="cert-date">Agosto 2025</div>
+                </div>
+                
+                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://i.imgur.com/fe0gaEb.png" alt="University of Virginia Logo">
+                    </div>
+                    <h4>Business Strategy Specialization</h4>
+                    <div class="cert-provider">University of Virginia Darden</div>
+                    <div class="cert-date">2025</div>
+                </div>
+                
+                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.GiRmfAaeftypVoeXg505fAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Appian Logo">
+                    </div>
+                    <h4>Appian Analyst & Developer</h4>
+                    <div class="cert-provider">Appian</div>
+                    <div class="cert-date">Mayo 2025</div>
+                </div>
+                
+                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://logos-world.net/wp-content/uploads/2021/11/Udemy-Logo.png" alt="Udemy Logo">
+                    </div>
+                    <h4>Advanced BPMN 2.0</h4>
+                    <div class="cert-provider">Udemy</div>
+                    <div class="cert-date">Abril 2025</div>
+                </div>
+
+                                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://www.signe.es/wp-content/uploads/2021/10/UE_Logo_Positive_RGB_8886cecf-afc9-4280-aa69-8615676d1d03_1513x-2-e1635163959405.png" alt="Universidad Europea Logo">
+                    </div>
+                    <h4>Inteligencia Artificial Intermediate</h4>
+                    <div class="cert-provider">Universidad Europea</div>
+                    <div class="cert-date">Junio 2025</div>
+                </div>
+                
+                <div class="cert-card fade-in">
+                    <div class="cert-logo">
+                        <img src="https://i.imgur.com/849dLGC.png" alt="IBM Logo">
+                    </div>
+                    <h4>Penetration Testing & Forensics</h4>
+                    <div class="cert-provider">IBM</div>
+                    <div class="cert-date">Marzo 2024</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in-left').forEach(el => {
+            observer.observe(el);
+        });
+
+        const cards = document.querySelectorAll('.cert-card');
+        cards.forEach((card, index) => {
+            card.style.transitionDelay = index * 100 + 'ms';
+        });
+
+        const positions = document.querySelectorAll('.position-card');
+        positions.forEach((pos, index) => {
+            pos.style.transitionDelay = index * 200 + 'ms';
+        });
+
+        const educations = document.querySelectorAll('.education-item');
+        educations.forEach((edu, index) => {
+            edu.style.transitionDelay = index * 150 + 'ms';
+        });
+
+        document.querySelectorAll('.logo-container').forEach(logo => {
+            logo.addEventListener('click', function() {
+                console.log('Logo container clicked:', this.textContent);
+            });
+        });
+
+        function uploadHeaderLogo() { console.log('Upload header logo'); }
+        function uploadProfilePhoto() { console.log('Upload profile photo'); }
+    </script>
+</body>
+</html>
