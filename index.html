@@ -836,28 +836,79 @@
         function uploadProfilePhoto() { console.log('Upload profile photo'); }
 
         document.getElementById('downloadContact').addEventListener('click', function(e) {
-    e.preventDefault(); // evita que el enlace navegue
+            e.preventDefault();
 
-    const vcard = `
-        BEGIN:VCARD
-        VERSION:3.0
-        FN:Óscar Martín García
-        ORG:Qaracter
-        TITLE:Head of Nexora & Business Analyst
-        TEL;TYPE=CELL:+34634510743
-        EMAIL:oscar.martin@qaracter.com
-        EMAIL;TYPE=HOME:oscarmg04@gmail.com
-        URL:https://www.linkedin.com/in/óscar-martín-garcía-bb5089250
-        ADR;TYPE=HOME:;;Madrid;;;;
-        END:VCARD
-            `.trim();
+            // Función para convertir imagen a Base64
+            function getImageAsBase64(imageUrl, callback) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.crossOrigin = 'anonymous';
+                img.onload = function() {
+                    // Redimensionar la imagen para optimizar el tamaño del VCF
+                    const maxSize = 200;
+                    let { width, height } = img;
+                    
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = (height * maxSize) / width;
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = (width * maxSize) / height;
+                            height = maxSize;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    const base64 = canvas.toDataURL('image/jpeg', 0.7).split(',')[1];
+                    callback(base64);
+                };
+                
+                img.onerror = function() {
+                    console.warn('No se pudo cargar la imagen, creando VCF sin foto');
+                    callback(null);
+                };
+                
+                img.src = imageUrl;
+            }
 
-            const blob = new Blob([vcard], { type: 'text/vcard' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Oscar_Martin.vcf';
-            link.click();
+            // URL de la imagen del perfil
+            const profileImageUrl = 'https://i.imgur.com/9y8KWC5.png';
+            
+            getImageAsBase64(profileImageUrl, function(base64Image) {
+                let vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Óscar Martín García
+N:Martín García;Óscar;;;
+ORG:Qaracter
+TITLE:Head of Nexora & Business Analyst
+TEL;TYPE=CELL:+34634510743
+EMAIL;TYPE=WORK:oscar.martin@qaracter.com
+EMAIL;TYPE=HOME:oscarmg04@gmail.com
+URL:https://www.linkedin.com/in/óscar-martín-garcía-bb5089250
+ADR;TYPE=HOME:;;Madrid;Madrid;;España`;
+
+                // Añadir la foto si se pudo convertir
+                if (base64Image) {
+                    vcard += `\nPHOTO;ENCODING=BASE64;TYPE=JPEG:${base64Image}`;
+                }
+                
+                vcard += `\nEND:VCARD`;
+
+                const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'Oscar_Martin_Garcia.vcf';
+                link.click();
+            });
         });
+
     </script>
 </body>
 </html>
