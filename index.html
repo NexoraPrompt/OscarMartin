@@ -428,18 +428,33 @@
 
         /* LinkedIn button */
         .linkedin-btn {
-            background: #0077B5;
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
+            margin-top: 40px;
             display: inline-flex;
+            background: #0077B5;
             align-items: center;
             gap: 0.8rem;
+            padding: 1rem 2rem;
+            border-radius: 10px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 1.5rem;
+            text-decoration: none;
             box-shadow: var(--shadow);
+            vertical-align: middle; /* asegura alineación */
+        }
+
+        .linkedin-btn .linkedin-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 16px; /* mismo tamaño para emoji y logo */
+        }
+
+        .linkedin-btn .linkedin-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .linkedin-btn:hover {
@@ -483,6 +498,21 @@
             opacity: 1;
             transform: translateX(0);
         }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .save-contact-btn {
+            background: #ff6600; /* color naranja Nexora */
+        }
+
+        .save-contact-btn:hover {
+            background: #e65c00; /* hover */
+        }
+
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -612,8 +642,18 @@
                     </span>
                     Ver LinkedIn
                 </a>
+                <a href="#" id="downloadContact" class="linkedin-btn" style="background: #0077B5;">
+                    <span class="linkedin-icon">
+                    <!-- Icono de descarga SVG -->
+                        <img src="https://cdn-icons-png.flaticon.com/512/159/159634.png" alt="LinkedIn" style="width: 16px; height: 16px;">
+                    </span>
+                Guardar contacto
+            </a>
+
             </div>
+            
         </div>
+
     </header>
 
     <!-- Main Content -->
@@ -794,6 +834,30 @@
 
         function uploadHeaderLogo() { console.log('Upload header logo'); }
         function uploadProfilePhoto() { console.log('Upload profile photo'); }
+
+        document.getElementById('downloadContact').addEventListener('click', function(e) {
+    e.preventDefault(); // evita que el enlace navegue
+
+    const vcard = `
+        BEGIN:VCARD
+        VERSION:3.0
+        FN:Óscar Martín García
+        ORG:Qaracter
+        TITLE:Head of Nexora & Business Analyst
+        TEL;TYPE=CELL:+34634510743
+        EMAIL:oscar.martin@qaracter.com
+        EMAIL;TYPE=HOME:oscarmg04@gmail.com
+        URL:https://www.linkedin.com/in/óscar-martín-garcía-bb5089250
+        ADR;TYPE=HOME:;;Madrid;;;;
+        END:VCARD
+            `.trim();
+
+            const blob = new Blob([vcard], { type: 'text/vcard' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'Oscar_Martin.vcf';
+            link.click();
+        });
     </script>
 </body>
 </html>
